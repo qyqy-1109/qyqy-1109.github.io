@@ -80,10 +80,18 @@ function formatDate(value) {
 }
 
 function normalizeRepo(repo) {
+  let description = String(repo.description || "");
+  const name = String(repo.name || "");
+  for (const prefix of [`${name} · `, `${name} - `, `${name}: `]) {
+    if (description.startsWith(prefix)) {
+      description = description.slice(prefix.length);
+      break;
+    }
+  }
   return {
-    name: String(repo.name || ""),
+    name,
     html_url: String(repo.html_url || ""),
-    description: String(repo.description || ""),
+    description,
     language: repo.language ? String(repo.language) : "",
     topics: Array.isArray(repo.topics) ? repo.topics.slice(0, 3) : [],
     stargazers_count: Number(repo.stargazers_count || 0),
