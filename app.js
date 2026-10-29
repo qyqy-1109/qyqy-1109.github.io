@@ -1,6 +1,5 @@
 const USER = "qyqy-1109";
 const API = `https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`;
-const FEATURED = "old-acquaintance";
 const HIDDEN = new Set(["ecc-file-sharing", USER, `${USER}.github.io`]);
 const PROJECT_ORDER = new Map([
   ["old-acquaintance", 0],
@@ -212,12 +211,23 @@ function renderRepos() {
 
   const suffix = visible.length === repos.length ? "" : ` / ${repos.length}`;
   statusNode.textContent = `共 ${visible.length}${suffix} 个公开仓库`;
+  return visible.length;
 }
 
 async function loadRepos() {
+  // 先渲染精选项目，避免 GitHub API 慢时页面空白。
+  repos = FALLBACK;
+  renderFilters();
+  renderRepos();
+  statusNode.textContent = "正在读取 GitHub 仓库…";
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 6000);
+  let notice = "";
   try {
     const response = await fetch(API, {
       headers: { Accept: "application/vnd.github+json" },
+      signal: controller.signal,
     });
     if (!response.ok) throw new Error(`GitHub API ${response.status}`);
     const data = await response.json();
@@ -234,15 +244,16 @@ async function loadRepos() {
           || new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime();
       });
     repos = loaded.length ? loaded : FALLBACK;
-    statusNode.textContent = loaded.length
-      ? `已连接 GitHub · ${repos.length} 个公开仓库`
-      : "GitHub 上还没有公开仓库，先展示精选项目。";
+    notice = loaded.length ? "已连接 GitHub" : "GitHub 上还没有作品仓库，显示精选项目";
   } catch (error) {
     repos = FALLBACK;
-    statusNode.textContent = "GitHub API 暂时不可用，当前显示精选项目；完整列表请直接访问 GitHub。";
+    notice = "GitHub API 暂时不可用，显示精选项目";
+  } finally {
+    clearTimeout(timer);
+    renderFilters();
+    const count = renderRepos();
+    statusNode.textContent = `${notice} · ${count} 个作品仓库`;
   }
-  renderFilters();
-  renderRepos();
 }
 
 search.addEventListener("input", () => {
