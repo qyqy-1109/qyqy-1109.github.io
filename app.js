@@ -2,6 +2,13 @@ const USER = "qyqy-1109";
 const API = `https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`;
 const FEATURED = "old-acquaintance";
 const HIDDEN = new Set(["ecc-file-sharing"]);
+const RESEARCH = new Set(["deepseek-harness-desktop"]);
+const OVERRIDES = {
+  "deepseek-harness-desktop": {
+    description: "Electron 研究：验证自包含 Windows 桌面壳如何自动启动本地 dsh web 服务，并试验 Codex 风格的主题机制。",
+    topics: ["electron", "research", "desktop"],
+  },
+};
 
 const FALLBACK = [
   {
@@ -71,8 +78,9 @@ function formatDate(value) {
 }
 
 function normalizeRepo(repo) {
-  let description = String(repo.description || "");
   const name = String(repo.name || "");
+  const override = OVERRIDES[name] || {};
+  let description = String(override.description || repo.description || "");
   for (const prefix of [`${name} · `, `${name} - `, `${name}: `]) {
     if (description.startsWith(prefix)) {
       description = description.slice(prefix.length);
@@ -84,7 +92,9 @@ function normalizeRepo(repo) {
     html_url: String(repo.html_url || ""),
     description,
     language: repo.language ? String(repo.language) : "",
-    topics: Array.isArray(repo.topics) ? repo.topics.slice(0, 3) : [],
+    topics: Array.isArray(override.topics)
+      ? override.topics
+      : Array.isArray(repo.topics) ? repo.topics.slice(0, 3) : [],
     stargazers_count: Number(repo.stargazers_count || 0),
     forks_count: Number(repo.forks_count || 0),
     pushed_at: repo.pushed_at || "",
@@ -138,6 +148,12 @@ function buildRepoCard(repo) {
   dot.className = "lang-dot";
   dot.style.background = LANGUAGE_COLORS[repo.language] || "#98a098";
   language.append(dot, document.createTextNode(repo.language || "Repository"));
+  if (RESEARCH.has(repo.name)) {
+    const kind = document.createElement("span");
+    kind.className = "repo-kind";
+    kind.textContent = "Research";
+    language.append(kind);
+  }
   const updated = document.createElement("span");
   updated.textContent = formatDate(repo.pushed_at) ? `更新于 ${formatDate(repo.pushed_at)}` : "";
   top.append(language, updated);
