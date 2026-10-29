@@ -522,6 +522,27 @@ main {
 }
 .about-copy p { margin: 0 0 17px; color: var(--muted); font-size: 15px; line-height: 1.95; }
 .about-copy strong { color: var(--ink); font-weight: 600; }
+.about-projects { margin: 22px 0 26px; border-top: 1px solid var(--line); }
+.about-projects > div {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.about-projects strong {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.about-projects p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
 .principles { display: grid; gap: 0; border-top: 1px solid var(--line); }
 .principles > div {
   display: grid;
@@ -608,6 +629,7 @@ main {
   .featured-aside dl { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
   .repo-grid { grid-template-columns: 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .about-projects > div { grid-template-columns: 1fr; gap: 3px; }
   .site-footer { padding: 24px 24px 36px; }
 }
 
