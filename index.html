@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#f7f8f6">
+  <title>qyqy-1109 · AI systems, memory & evaluation</title>
+  <meta name="description" content="qyqy-1109 的个人作品集：本地优先的 AI 系统、记忆治理与可复现评测。">
+  <meta property="og:title" content="qyqy-1109 · AI systems, memory & evaluation">
+  <meta property="og:description" content="本地优先的 AI 系统、记忆治理与可复现评测。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qyqy-1109.github.io/">
+  <link rel="canonical" href="https://qyqy-1109.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="qyqy-1109 首页">
+      <span class="brand-mark" aria-hidden="true">q</span>
+      <span>qyqy-1109</span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#work">Work</a>
+      <a href="#repos">Repositories</a>
+      <a href="#about">About</a>
+      <a class="nav-external" href="https://github.com/qyqy-1109" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="kicker">AI systems · memory · evaluation</p>
+      <h1 id="hero-title">你好，我是<br><span>qyqy-1109</span>。</h1>
+      <div class="hero-copy">
+        <p class="lede">我做本地优先的 AI 系统：让模型能记住、能自洽，也能被评测。</p>
+        <p class="hero-note">Currently building <a href="https://github.com/qyqy-1109/old-acquaintance" target="_blank" rel="noreferrer">旧识 / old-acquaintance</a> — a local companion assistant with governed long-term memory.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button primary" href="#work">看项目</a>
+        <a class="button" href="https://github.com/qyqy-1109" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="section-head">
+        <p class="section-index">01</p>
+        <div>
+          <h2 id="work-title">Selected work</h2>
+          <p>一个把“记忆该不该写、旧记录怎么退场”做成显式机制的项目。</p>
+        </div>
+      </div>
+
+      <article class="featured">
+        <div class="featured-main">
+          <p class="eyebrow">Featured · Python / FastAPI / SQLite</p>
+          <h3>旧识 <span>old-acquaintance</span></h3>
+          <p class="featured-lede">一个跑在本机的陪伴型对话助手。重点不是聊天界面，而是四层记忆系统：事实短句、滚动摘要、原文与遗忘机制分开治理。</p>
+          <ul class="tag-list" aria-label="项目特点">
+            <li>四层记忆</li>
+            <li>写路径治理</li>
+            <li>人格卡片</li>
+            <li>跨会话搜索</li>
+            <li>可复现评测</li>
+          </ul>
+          <div class="featured-links">
+            <a class="text-link" href="https://github.com/qyqy-1109/old-acquaintance" target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://github.com/qyqy-1109/old-acquaintance#readme" target="_blank" rel="noreferrer">Read the README <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <aside class="featured-aside" aria-label="项目概要">
+          <dl>
+            <div><dt>Focus</dt><dd>Memory governance</dd></div>
+            <div><dt>Shape</dt><dd>Local-first · single user</dd></div>
+            <div><dt>Stack</dt><dd>Python · SQLite · LLM</dd></div>
+            <div><dt>Status</dt><dd>Public</dd></div>
+          </dl>
+        </aside>
+      </article>
+    </section>
+
+    <section class="section" id="repos" aria-labelledby="repos-title">
+      <div class="section-head">
+        <p class="section-index">02</p>
+        <div>
+          <h2 id="repos-title">All repositories</h2>
+          <p>从 GitHub 自动读取公开仓库；按 star 与最近更新时间排序。</p>
+        </div>
+      </div>
+
+      <div class="repo-controls">
+        <label class="search-box" for="repo-search">
+          <span class="sr-only">搜索仓库</span>
+          <input id="repo-search" type="search" maxlength="80" placeholder="搜索名称、描述或 topic…" autocomplete="off">
+        </label>
+        <div id="language-filters" class="filters" aria-label="按语言筛选"></div>
+      </div>
+
+      <div id="repo-status" class="repo-status" role="status">正在读取 GitHub 仓库…</div>
+      <div id="repo-grid" class="repo-grid" aria-live="polite"></div>
+      <p class="repo-footnote">只展示公开、非 fork 的仓库。GitHub API 不可用时显示精选项目。</p>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-head">
+        <p class="section-index">03</p>
+        <div>
+          <h2 id="about-title">About</h2>
+          <p>我更关心系统在出错时是否可见、在变化后是否还能验证。</p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>我的项目大多围绕同一个问题：<strong>模型可以生成内容，但谁来决定什么值得被记住？</strong></p>
+          <p>所以我把记忆拆成写入、召回、退场和评测四件事，尽量让每一步都有明确的代码位置、可观察的事件和可复现的测试。界面可以简单，但底层行为要说得清。</p>
+          <p>目前主要用 Python 和 SQLite 做本地优先的 AI 应用，前端保持原生 HTML/CSS/JS，不依赖外部 CDN。</p>
+        </div>
+        <aside class="principles" aria-label="我在意的事">
+          <div><span>01</span><p><strong>写路径纪律</strong><br>什么允许进记忆、谁有权改、旧记录怎么退场。</p></div>
+          <div><span>02</span><p><strong>可证伪的评测</strong><br>规则层 + 裁判层，支持重复跑与离线重评。</p></div>
+          <div><span>03</span><p><strong>本地优先</strong><br>数据留在本机；没有密钥时功能明确降级。</p></div>
+        </aside>
+      </div>
+
+      <div class="toolbox" aria-label="常用工具">
+        <span>Python</span><span>FastAPI</span><span>SQLite</span><span>OpenAI-compatible APIs</span><span>HTML / CSS / JS</span><span>GitHub Actions</span>
+      </div>
+    </section>
+
+    <section class="contact" aria-labelledby="contact-title">
+      <p class="kicker">Elsewhere</p>
+      <h2 id="contact-title">想看看代码，或者聊聊记忆系统？</h2>
+      <p>GitHub 是最好的入口。项目、issue 和讨论都在那里。</p>
+      <a class="button primary" href="https://github.com/qyqy-1109" target="_blank" rel="noreferrer">去 GitHub <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year">2026</span> qyqy-1109</span>
+    <span>Built with plain HTML, CSS &amp; JS · Hosted on GitHub Pages</span>
+  </footer>
+
+  <noscript><p class="noscript">启用 JavaScript 后可以自动加载 GitHub 仓库列表；也可以直接访问 <a href="https://github.com/qyqy-1109">GitHub</a>。</p></noscript>
+</body>
+</html>
