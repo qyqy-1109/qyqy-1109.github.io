@@ -1,7 +1,12 @@
 const USER = "qyqy-1109";
 const API = `https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`;
 const FEATURED = "old-acquaintance";
-const HIDDEN = new Set(["ecc-file-sharing"]);
+const HIDDEN = new Set(["ecc-file-sharing", USER, `${USER}.github.io`]);
+const PROJECT_ORDER = new Map([
+  ["old-acquaintance", 0],
+  ["quote-lens", 1],
+  ["deepseek-harness-desktop", 2],
+]);
 const RESEARCH = new Set(["deepseek-harness-desktop"]);
 const OVERRIDES = {
   "deepseek-harness-desktop": {
@@ -222,9 +227,10 @@ async function loadRepos() {
       .map(normalizeRepo)
       .filter((repo) => repo.name && repo.html_url)
       .sort((a, b) => {
-        if (a.name === FEATURED) return -1;
-        if (b.name === FEATURED) return 1;
-        return b.stargazers_count - a.stargazers_count
+        const rankA = PROJECT_ORDER.has(a.name) ? PROJECT_ORDER.get(a.name) : 99;
+        const rankB = PROJECT_ORDER.has(b.name) ? PROJECT_ORDER.get(b.name) : 99;
+        return rankA - rankB
+          || b.stargazers_count - a.stargazers_count
           || new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime();
       });
     repos = loaded.length ? loaded : FALLBACK;
