@@ -1,6 +1,7 @@
 const USER = "qyqy-1109";
 const API = `https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`;
 const FEATURED = "old-acquaintance";
+const HIDDEN = new Set(["ecc-file-sharing"]);
 
 const FALLBACK = [
   {
@@ -30,16 +31,6 @@ const FALLBACK = [
     language: "JavaScript",
     topics: ["electron", "desktop", "deepseek"],
     stargazers_count: 10,
-    forks_count: 0,
-    pushed_at: "2026-08-01T00:00:00Z",
-  },
-  {
-    name: "ecc-file-sharing",
-    html_url: `https://github.com/${USER}/ecc-file-sharing`,
-    description: "",
-    language: "Python",
-    topics: [],
-    stargazers_count: 0,
     forks_count: 0,
     pushed_at: "2026-08-01T00:00:00Z",
   },
@@ -211,7 +202,7 @@ async function loadRepos() {
     const data = await response.json();
     if (!Array.isArray(data)) throw new Error("Unexpected GitHub response");
     const loaded = data
-      .filter((repo) => !repo.fork)
+      .filter((repo) => !repo.fork && !HIDDEN.has(repo.name))
       .map(normalizeRepo)
       .filter((repo) => repo.name && repo.html_url)
       .sort((a, b) => {

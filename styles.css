@@ -154,6 +154,14 @@ main {
   color: var(--brand);
   font-style: italic;
 }
+.hero-handle {
+  margin: 18px 0 0;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+.hero-handle a { color: var(--brand); border-bottom: 1px solid color-mix(in srgb, var(--brand) 35%, transparent); }
 
 .hero-copy {
   display: grid;
