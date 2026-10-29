@@ -188,9 +188,14 @@ function buildRepoCard(repo) {
 
   const meta = document.createElement("div");
   meta.className = "repo-meta";
-  if (repo.language) meta.append(document.createTextNode(repo.language));
-  if (repo.stargazers_count > 0) meta.append(document.createTextNode(`★ ${repo.stargazers_count}`));
-  if (repo.forks_count > 0) meta.append(document.createTextNode(`Forks ${repo.forks_count}`));
+  const metaItem = (text) => {
+    const item = document.createElement("span");
+    item.textContent = text;
+    meta.append(item);
+  };
+  if (repo.language) metaItem(repo.language);
+  if (repo.stargazers_count > 0) metaItem(`★ ${repo.stargazers_count}`);
+  if (repo.forks_count > 0) metaItem(`Forks ${repo.forks_count}`);
   card.append(meta);
 
   return card;
